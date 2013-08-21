@@ -1,0 +1,158 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+            <J2t_Rewardproductvalue>
+                    <version>1.0.1</version>
+                    <depends>
+                            <Mage_Customer />
+                            <Mage_Checkout />
+                            <Rewardpoints />
+                    </depends>
+            </J2t_Rewardproductvalue>
+    </modules>
+
+
+    <global>
+        
+        <resources>
+            <j2trewardproductvalue_setup>
+                <setup>
+                    <module>J2t_Rewardproductvalue</module>
+                    <class>Mage_Core_Model_Resource_Setup</class>
+                </setup>
+                <connection><use>core_setup</use></connection>
+            </j2trewardproductvalue_setup>
+            <j2trewardproductvalue_write>
+                    <connection><use>core_write</use></connection>
+            </j2trewardproductvalue_write>
+            <j2trewardproductvalue_read>
+                    <connection><use>core_read</use></connection>
+            </j2trewardproductvalue_read>
+        </resources>
+        
+        <models>
+            <j2trewardproductvalue>
+                <class>J2t_Rewardproductvalue_Model</class>
+                <resourceModel>rewardpoints_mysql4</resourceModel>
+            </j2trewardproductvalue>
+            
+        </models>
+        
+        <!--<models>
+            <j2trewardproductvalue>
+                <class>J2t_Rewardproductvalue_Model</class>
+                <resourceModel>j2trewardproductvalue_mysql4</resourceModel>
+            </j2trewardproductvalue>
+            
+            <j2trewardproductvalue_mysql4>
+                <class>J2t_Rewardproductvalue_Model_Mysql4</class>
+                <entities>
+                    <discountlabel>
+                        <table>j2t_discount_label</table>
+                    </discountlabel>
+                    <productlabel>
+                        <table>j2t_product_label</table>
+                    </productlabel>
+                </entities>
+            </j2trewardproductvalue_mysql4>
+            
+        </models>-->
+        <blocks>
+            <j2trewardproductvalue>
+                <class>J2t_Rewardproductvalue_Block</class>
+            </j2trewardproductvalue>
+            
+            <!-- Mage_Catalog_Block_Product_List -->
+            <!-- Mage_Catalog_Block_Product_View -->
+            <catalog>
+                <rewrite>
+                    <product_list>J2t_Rewardproductvalue_Block_Productlist</product_list>
+                    <product_view>J2t_Rewardproductvalue_Block_Productview</product_view>
+                </rewrite>
+            </catalog>
+            
+            <checkout>
+                <rewrite>
+                    <cart_item_renderer>J2t_Rewardproductvalue_Block_Cartrenderer</cart_item_renderer>
+                    <cart_item_renderer_configurable>J2t_Rewardproductvalue_Block_Cartrendererconf</cart_item_renderer_configurable>
+                </rewrite>
+            </checkout>
+            
+            <!-- Mage_Checkout_Block_Cart_Item_Renderer -->
+            <!-- Mage_Checkout_Block_Cart_Item_Renderer_Configurable -->
+        </blocks>
+        
+        
+        <helpers>
+            <j2trewardproductvalue>
+                <class>J2t_Rewardproductvalue_Helper</class>
+            </j2trewardproductvalue>
+        </helpers>
+
+    </global>
+
+    <frontend>
+        <layout>
+            <updates>
+                <j2trewardproductvalue>
+                    <file>j2trewardproductvalue.xml</file>
+                </j2trewardproductvalue>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <J2t_Rewardproductvalue>
+                    <files>
+                        <default>j2t_rewardproductvalue.csv</default>
+                    </files>
+                </J2t_Rewardproductvalue>
+            </modules>
+        </translate>
+
+        <routers>
+            <j2trewardproductvalue>
+                <use>standard</use>
+                <args>
+                    <module>J2t_Rewardproductvalue</module>
+                    <frontName>j2trewardproductvalue</frontName>
+                </args>
+            </j2trewardproductvalue>
+        </routers>
+        
+        <events>
+            <sales_order_save_before>
+            <!--<sales_convert_quote_to_order>-->
+                <observers>
+                    <j2trewardproductvalue_order_convert>
+                        <type>singleton</type>
+                        <class>j2trewardproductvalue/observer</class>
+                        <method>quoteToOrder</method>
+                    </j2trewardproductvalue_order_convert>
+                </observers>
+            <!--</sales_convert_quote_to_order>-->
+            </sales_order_save_before>
+            
+            <checkout_controller_multishipping_shipping_post>
+                <observers>
+                    <j2trewardproductvalue_multiorder_convert>
+                        <type>singleton</type>
+                        <class>j2trewardproductvalue/observer</class>
+                        <method>multipleOrderCheck</method>
+                    </j2trewardproductvalue_multiorder_convert>
+                </observers>
+            </checkout_controller_multishipping_shipping_post>
+        </events>
+        
+        <product>
+            <collection>
+                <attributes>
+                    <j2t_rewardvalue/>
+                </attributes>
+            </collection>
+        </product>
+
+        
+    </frontend>
+
+</config>
+

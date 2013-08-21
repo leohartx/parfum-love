@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <acl>
+		<resources>
+			<all>
+				<title>Allow Everything</title>
+			</all>
+			<admin>
+				<children>
+					<Intell_Colorswatch>
+						<title>Colorswatch Module</title>
+						<sort_order>10</sort_order>
+					</Intell_Colorswatch>
+					<system>
+						<children>
+							<config>
+								<children>
+									<small>
+										<title>General Settings</title>
+									</small>
+								</children>
+							</config>
+						</children>
+					</system>
+				</children>
+			</admin>
+		</resources>
+	</acl>
+</config>

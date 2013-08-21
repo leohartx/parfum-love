@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <J2t_Rewardproductvalue>
+            <active>true</active>
+            <codePool>community</codePool>
+            <depends>
+                <Mage_Adminhtml />
+                <Mage_Catalog />
+                <Mage_Checkout />
+                <Mage_Sales />
+                <Rewardpoints />
+            </depends>
+        </J2t_Rewardproductvalue>
+    </modules>
+</config>

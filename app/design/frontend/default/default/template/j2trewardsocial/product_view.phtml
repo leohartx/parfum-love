@@ -1,0 +1,126 @@
+<?php
+
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+?>
+<?php $_helper = $this->helper('catalog/output'); ?>
+<?php $_product = $this->getProduct(); ?>
+<?php //echo $_product->getId();?>  
+<?php //echo $_product->getProductUrl();?>
+
+<?php 
+    $facebook_points = $_product->getData('rewardsocial_facebook');
+    $googleplus_points = $_product->getData('rewardsocial_google');
+    $twitter_points = $_product->getData('rewardsocial_twitter');
+    
+    //rewardsocial_facebook
+    //rewardsocial_google
+    //rewardsocial_twitter
+   
+    //facebook_datalayout
+    //facebook_dataaction
+    $facebook_datalayout = Mage::getStoreConfig('rewardpoints/social/facebook_datalayout', Mage::app()->getStore()->getId());
+    $facebook_datalayout = ($facebook_datalayout) ? $facebook_datalayout : 'button_count';
+    $facebook_dataaction = Mage::getStoreConfig('rewardpoints/social/facebook_dataaction', Mage::app()->getStore()->getId());
+    $facebook_dataaction = ($facebook_dataaction) ? $facebook_dataaction : 'like';
+    $facebook_language = Mage::getStoreConfig('rewardpoints/social/facebook_language', Mage::app()->getStore()->getId());
+    $facebook_language = ($facebook_language) ? $facebook_language : 'en_US';
+
+    //googleplus_datasize
+    //googleplus_dataannotation
+    //googleplus_extra
+    $googleplus_datasize = Mage::getStoreConfig('rewardpoints/social/googleplus_datasize', Mage::app()->getStore()->getId());
+    $googleplus_datasize = ($googleplus_datasize) ? $googleplus_datasize : 'medium';
+    $googleplus_dataannotation = Mage::getStoreConfig('rewardpoints/social/googleplus_dataannotation', Mage::app()->getStore()->getId());
+    $googleplus_dataannotation = ($googleplus_dataannotation) ? $googleplus_dataannotation : 'bubble';
+    $googleplus_extra = Mage::getStoreConfig('rewardpoints/social/googleplus_extra', Mage::app()->getStore()->getId());
+    $googleplus_extra = ($googleplus_extra) ? $googleplus_extra : '';
+
+    //twitter_datacount
+    //twitter_datasize
+    $twitter_datacount = Mage::getStoreConfig('rewardpoints/social/twitter_datacount', Mage::app()->getStore()->getId());
+    $twitter_datacount = ($twitter_datacount) ? $twitter_datacount : 'horizontal';
+    $twitter_datasize = Mage::getStoreConfig('rewardpoints/social/twitter_datasize', Mage::app()->getStore()->getId());
+    $twitter_datasize = ($twitter_datasize) ? $twitter_datasize : 'default';
+    
+?>
+
+<?php if ($facebook_points || $googleplus_points || $twitter_points):?>
+<div class="product-view-social-points">
+    <h2><?php echo $this->__('Share and collect points') ?></h2>
+    <div class="product-view-rewardsocial-content">
+        <?php if (Mage::getSingleton('customer/session')->isLoggedIn()): ?>
+            <?php if ($facebook_points):?>
+            <!-- Facebook Like -->
+            <p class="j2t-social-title-content">
+                <?php echo $this->__('Like this product and collect %d point(s)', $facebook_points);?>
+            </p>
+            <p class="j2t-social-inside-content">
+                <fb:like id="product_socialpoint_<?php echo $_product->getId();?>" href="<?php echo $_product->getProductUrl();?>?social_id_<?php echo $_product->getId();?>" data-send="false" data-action="<?php echo $facebook_dataaction;?>" data-layout="<?php echo $facebook_datalayout;?>" data-width="450" data-show-faces="true"></fb:like>
+                <br style="clear:both;" />
+            </p>
+            <?php endif;?>
+            <!-- End Facebook Like -->
+
+            <?php if ($googleplus_points > 0):?>
+            <!-- Google Plus -->
+            <p class="j2t-social-title-content">
+                <?php echo $this->__('Google Plus this product and collect %d point(s)', $googleplus_points);?>
+            </p>
+            <p class="j2t-social-inside-content">
+                <script type="text/javascript">
+                    //<![CDATA[
+                    function recordProductGooglePlus(jsonParam){
+                        if (jsonParam.state == "on"){
+                            var url = "<?php echo $this->getUrl('j2trewardsocial/social/index')?>";
+                            var myAjax = new Ajax.Request(
+                            url,
+                            {
+                                asynchronous: true,
+                                method: 'post',
+                                parameters : "network=gp&product_id=<?php echo $_product->getId();?>",
+                                onException: function (xhr, e)
+                                {
+                                    alert('Exception : ' + e);
+                                },
+                                onComplete: function (xhr)
+                                {
+                                    //alert(xhr.responseText);
+                                }
+
+                            });
+                        }
+                    }
+                    //]]>
+                </script>
+
+                <!-- Place this tag where you want the +1 button to render. -->
+                <div class="g-plusone" data-size="<?php echo $googleplus_datasize;?>" data-annotation="<?php echo $googleplus_dataannotation;?>" data-callback="recordProductGooglePlus" data-href="<?php echo $_product->getProductUrl();?>"></div>
+
+            </p>
+            <!-- end Google Plus -->
+            <?php endif;?>
+
+            <?php if ($twitter_points):?>
+            <!-- Twitter -->
+            <p class="j2t-social-title-content">
+                <?php echo $this->__('Tweet this product and collect %d point(s)', $twitter_points);?>
+            </p>
+            <p class="j2t-social-inside-content">
+                <?php /*?><a href="https://twitter.com/share" class="twitter-share-button" data-count="<?php echo $twitter_datacount;?>" data-size="<?php echo $twitter_datasize;?>" data-url="<?php echo $_product->getProductUrl();?>?social_id_<?php echo $_product->getId();?>">Tweet</a><?php */?>
+                <a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo Mage::helper("j2trewardsocial")->createShortUrl($_product->getProductUrl()."?social_id_".$_product->getId());?>" data-counturl="<?php echo $_product->getProductUrl()."?social_id_".$_product->getId();?>" data-count="<?php echo $twitter_datacount;?>">Tweet</a>
+                
+            </p>
+            <!-- end Twitter -->
+            <?php endif;?>
+            
+            
+        <?php else:?>
+            <?php $account_title = $this->__('your account');?>
+            <?php echo $this->__('Log into %s in order to collect extra points when sharing this site with your favorite social network.', '<a href="'.$this->getUrl('j2trewardsocial/social/login').'" title="'.$account_title.'">'.$account_title.'</a>');?>
+        <?php endif;?>
+    </div>
+</div>
+<?php endif; ?>

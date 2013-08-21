@@ -315,10 +315,10 @@ p.required { font-size:12px; text-align:right; color:#D36B00; }
 .notice-msg { border-color:#fcd344; background-color:#fafaec; background-image:url(../images/i_msg-note.gif); color:#3d6611; }
 
 /* BreadCrumbs */
-.breadcrumbs { float:right; margin:0; padding:48px 310px 0 0;}
+.breadcrumbs { float:left; margin:0; padding:48px 310px 0 0;}
 .breadcrumbs ul { padding:0 ;}
 .breadcrumbs li { display:inline; color:#000000; font-weight:bold; }
-.breadcrumbs li a{ font-weight:normal; font-family:Arial, Helvetica, sans-serif; color:#000; text-decoration:underline}
+.breadcrumbs li a{ font-weight:bold; font-family:Arial, Helvetica, sans-serif; color:#000; text-decoration:underline}
 .breadcrumbs li a:hover{ text-decoration:none;}
 .breadcrumbs li strong{ font-weight:normal; font-style:italic;}
 
@@ -502,7 +502,7 @@ ul.add-to-links li a:hover{ color:#f9900a;}
 
 .header .welcome-msg { font-weight:normal; font-size:14px; color:#D1D1D1; font-style:italic; text-align:right; float:right; padding:0 22px 0 0;}
 
-.header .links { float:right; padding:17px 44px 0 0; }
+.header .links { float:right; padding:17px 35px 0 0; }
 .header .links li{ background:url(../images/bg_links.gif) 0 7px no-repeat; padding:0 9px 0 19px;}
 .header .links li.first{ background:none;}
 .header .links li.last { padding-right:0;}
@@ -524,7 +524,7 @@ ul.add-to-links li a:hover{ color:#f9900a;}
 .form-language{ float:right; padding:23px 10px 0; color:#898989;}
 .form-language select{ background:#fff; border:solid 1px #d1d1d1; color:#898989;}
 
-.header .currency-header { float:right; margin:0 40px 0 0; font-size:13px; font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;}
+.header .currency-header { float:right; margin:0 34px 0 0; font-size:13px; font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;}
 .header .currency-header select{ color:#cccccc; background:#2c2d2c; border:solid 1px #545554; padding:0px; font-size:11px; line-height:11px; width:80px;}
 
 .header-container .top-container { clear:both; text-align:right; }
@@ -662,6 +662,7 @@ ul.add-to-links li a:hover{ color:#f9900a;}
 
 /* Block: Compare Products */
 .block-compare {}
+
 .block-compare .block-content li.item { background:url(../images/arr_compare.gif) 0 6px no-repeat; padding:0 0 15px 10px; font-family:Arial, Helvetica, sans-serif; font-size:12px; line-height:16px; color:#FFFFFF; }
 .block-compare .block-content li.item .product-name { font-family:Arial, Helvetica, sans-serif; font-size:12px; line-height:16px; color:#FFFFFF; }
 .block-compare .block-content li.item .product-name a{ font-family:Arial, Helvetica, sans-serif; font-size:12px; line-height:16px; color:#FFFFFF; }
@@ -1397,7 +1398,7 @@ ul.product-tags li a { font-size:12px; line-height:18px; color:#8B8989;}
 .footer-right-col { float:right; padding:9px 0 0 0;}
 
 
-.footer .icons { float:left; width:90px; height:12px; background:url(../images/icons.gif) 0 0 no-repeat; margin:3px 0 0 0;}
+.footer .icons { float:left; width:124px; height:12px; background:url(../images/icons.gif) 0 0 no-repeat; margin:-19px 0 0 0;}
 
 /* ======================================================================================= */
 

@@ -1,0 +1,170 @@
+<config>
+    <sections>
+        <rewardpoints translate="label comment" module="rewardpoints">
+            <tab>customer</tab>
+            <label>Reward Points</label>
+            <frontend_type>text</frontend_type>
+            <sort_order>200</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                
+                <social translate="label comment" module="rewardpoints">
+                    <label>Social Points</label>
+                    <comment><![CDATA[Note that customers need to be connected in order to collect social points. Also note that with twitter, client can modify message sent and therefore can remove shared URLs.]]></comment>
+
+                    <frontend_type>text</frontend_type>
+                    <sort_order>50</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <facebook_like_points translate="label">
+                            <label>Facebook Like points</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>validate-zero-or-greater</validate>
+                            <comment><![CDATA[Points earned clicking on facebook global like button. Use 0 to deactivate the service.]]></comment>
+                        </facebook_like_points>
+                        
+                        <facebook_datalayout translate="label">
+                            <label>Facebook data-layout</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Facebook data-layout (default is: button_count). Check facebook api in order to know other possible values.]]></comment>
+                        </facebook_datalayout>
+                        <facebook_dataaction translate="label">
+                            <label>Facebook data-action</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>12</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Facebook data-action (default is: like). Check facebook api in order to know other possible values.]]></comment>
+                        </facebook_dataaction>
+                        <facebook_language translate="label">
+                            <label>Facebook language</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>13</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Facebook language (default is: en_US, but you can change it to fr_FR for french for example, or any other language code). Check facebook api in order to know other possible values.]]></comment>
+                        </facebook_language>
+                        
+                        
+                        <googleplus_points translate="label">
+                            <label>Google plus points</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>validate-zero-or-greater</validate>
+                            <comment><![CDATA[Points earned clicking on google plus global button. Use 0 to deactivate the service.]]></comment>
+                        </googleplus_points>
+                        
+                        <googleplus_datasize translate="label">
+                            <label>Google plus data-size</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>21</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Google+ data-size (default is: medium). Check google+ api in order to know other possible values.]]></comment>
+                        </googleplus_datasize>
+                        <googleplus_dataannotation translate="label">
+                            <label>Google plus data-annotation</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>22</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Google+ data-annotation (default is: bubble). Check google+ api in order to know other possible values.]]></comment>
+                        </googleplus_dataannotation>
+                        <googleplus_extra translate="label">
+                            <label>Google Js Extra</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>23</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Can be used to inset extra js element such as language modification (e.g. window.___gcfg = {lang: 'fr'};).]]></comment>
+                        </googleplus_extra>
+                        
+                        <!--<pinterest_points translate="label">
+                            <label>Pinterest points</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>validate-zero-or-greater</validate>
+                            <comment><![CDATA[Points earned clicking on pinterest global button.]]></comment>
+                        </pinterest_points>-->
+                        <twitter_points translate="label">
+                            <label>Twitter points</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>validate-zero-or-greater</validate>
+                            <comment><![CDATA[Points earned clicking on twitter global button. Use 0 to deactivate the service.]]></comment>
+                        </twitter_points>
+                        
+                        <twitter_datacount translate="label">
+                            <label>Twitter data-count</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>41</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Twitter data-count (default is: horizontal). Check Twitter api in order to know other possible values.]]></comment>
+                        </twitter_datacount>
+                        <twitter_datasize translate="label">
+                            <label>Twitter data-size</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>42</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Twitter data-size (default is: default). Check Twitter api in order to know other possible values.]]></comment>
+                        </twitter_datasize>
+                        
+                        <use_url_shortener translate="label">
+                            <label>URL Shortener</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>43</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[This service uses TinyURL services in order to shorten your URLs (only used for Twitter).]]></comment>
+                        </use_url_shortener>
+                        
+                        <max_share_per_customer translate="label">
+                            <label>Max. social share / day</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>45</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Maximum social share per customer per day (0 for unlimited).]]></comment>
+                        </max_share_per_customer>
+                        
+                    </fields>
+                </social>
+
+            </groups>
+
+        </rewardpoints>
+    </sections>
+</config>

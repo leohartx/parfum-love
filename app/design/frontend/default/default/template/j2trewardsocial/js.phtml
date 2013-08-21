@@ -1,0 +1,150 @@
+<?php 
+    $facebook_points = Mage::getStoreConfig('rewardpoints/social/facebook_like_points', Mage::app()->getStore()->getId());
+    $googleplus_points = Mage::getStoreConfig('rewardpoints/social/googleplus_points', Mage::app()->getStore()->getId());
+    $twitter_points = Mage::getStoreConfig('rewardpoints/social/twitter_points', Mage::app()->getStore()->getId());
+    
+    //facebook_datalayout
+    //facebook_dataaction
+    $facebook_datalayout = Mage::getStoreConfig('rewardpoints/social/facebook_datalayout', Mage::app()->getStore()->getId());
+    $facebook_datalayout = ($facebook_datalayout) ? $facebook_datalayout : 'button_count';
+    $facebook_dataaction = Mage::getStoreConfig('rewardpoints/social/facebook_dataaction', Mage::app()->getStore()->getId());
+    $facebook_dataaction = ($facebook_dataaction) ? $facebook_dataaction : 'like';
+    $facebook_language = Mage::getStoreConfig('rewardpoints/social/facebook_language', Mage::app()->getStore()->getId());
+    $facebook_language = ($facebook_language) ? $facebook_language : 'en_US';
+
+    //googleplus_datasize
+    //googleplus_dataannotation
+    //googleplus_extra
+    $googleplus_datasize = Mage::getStoreConfig('rewardpoints/social/googleplus_datasize', Mage::app()->getStore()->getId());
+    $googleplus_datasize = ($googleplus_datasize) ? $googleplus_datasize : 'medium';
+    $googleplus_dataannotation = Mage::getStoreConfig('rewardpoints/social/googleplus_dataannotation', Mage::app()->getStore()->getId());
+    $googleplus_dataannotation = ($googleplus_dataannotation) ? $googleplus_dataannotation : 'bubble';
+    $googleplus_extra = Mage::getStoreConfig('rewardpoints/social/googleplus_extra', Mage::app()->getStore()->getId());
+    $googleplus_extra = ($googleplus_extra) ? $googleplus_extra : '';
+
+    //twitter_datacount
+    //twitter_datasize
+    $twitter_datacount = Mage::getStoreConfig('rewardpoints/social/twitter_datacount', Mage::app()->getStore()->getId());
+    $twitter_datacount = ($twitter_datacount) ? $twitter_datacount : 'horizontal';
+    $twitter_datasize = Mage::getStoreConfig('rewardpoints/social/twitter_datasize', Mage::app()->getStore()->getId());
+    $twitter_datasize = ($twitter_datasize) ? $twitter_datasize : 'default';
+    
+?>
+<script type="text/javascript">
+    var rewardsocial_siteurl = "<?php echo urlencode($this->getUrl())?>";
+</script>
+
+<?php if (($facebook_points || $googleplus_points || $twitter_points) && Mage::getSingleton('customer/session')->isLoggedIn()):?>
+
+    <?php if ($facebook_points):?>
+        <script src="//connect.facebook.net/<?php echo $facebook_language;?>/all.js"></script>
+
+        <div id="fb-root"></div>
+        <script type="text/javascript">
+        //<![CDATA[
+            FB.init({
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                xfbml: true  // parse XFBML
+            });
+        //]]>
+        </script>
+
+        <script type="text/javascript">
+        //<![CDATA[
+            FB.Event.subscribe('edge.create',
+            function (response) {
+                //alert('You liked the URL: ' + response);
+                //ajax call to record points
+                var extra_url = "";
+                var url_shared = response;
+                var j2tReg = /social_id_([0-9]+)/;
+                if (url_shared.search(j2tReg) != -1) {
+                    var j2tMatches = url_shared.match(j2tReg);
+                    if (j2tMatches[1] != undefined){
+                        extra_url = "&product_id="+j2tMatches[1];
+                    }
+                } 
+                var url = "<?php echo $this->getUrl('j2trewardsocial/social/index')?>";
+                var myAjax = new Ajax.Request(
+                url,
+                {
+                    asynchronous: true,
+                    method: 'post',
+                    parameters : "network=fb"+extra_url,
+                    onException: function (xhr, e)
+                    {
+                        alert('Exception : ' + e);
+                    },
+                    onComplete: function (xhr)
+                    {
+                        //alert(xhr.responseText);
+                    }
+
+                });
+            });
+        //]]>
+        </script>
+
+    <?php endif; ?>
+    <?php if ($googleplus_points):?>
+        <!-- Place this tag after the last +1 button tag. -->
+        <script type="text/javascript">
+        //<![CDATA[
+          //window.___gcfg = {lang: 'fr'};
+          <?php echo $googleplus_extra;?>
+          (function() {
+            var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+            po.src = 'https://apis.google.com/js/plusone.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+          })();
+          //]]>
+        </script>
+
+    <?php endif; ?>
+    <?php if ($twitter_points):?>
+            <script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
+            <script type="text/javascript">
+            //<![CDATA[
+                twttr.events.bind('tweet', function(event) {
+                    //console.log(event);
+                    var extra_url = "";
+                    var url_shared = event.target.src;
+                    //alert(url_shared);
+                    var shared_message = event.data;
+                    var j2tReg = /social_id_([0-9]+)/;
+                    if (url_shared.search(j2tReg) != -1) {
+                        var j2tMatches = url_shared.match(j2tReg);
+                        if (j2tMatches[1] != undefined){
+                            extra_url = "&product_id="+j2tMatches[1];
+                        }
+                    }
+                    
+                    //console.log(event.data);
+                    //if (shared_message.search(rewardsocial_siteurl) == -1){
+                    //}
+                    
+                    var url = "<?php echo $this->getUrl('j2trewardsocial/social/index')?>";
+                    var myAjax = new Ajax.Request(
+                    url,
+                    {
+                        asynchronous: true,
+                        method: 'post',
+                        parameters : "network=tt"+extra_url,
+                        onException: function (xhr, e)
+                        {
+                            alert('Exception : ' + e);
+                        },
+                        onComplete: function (xhr)
+                        {
+                            //alert(xhr.responseText);
+                        }
+                    });
+                });
+            //]]>
+            </script>
+
+    <?php endif; ?>
+
+<?php endif; ?>
+

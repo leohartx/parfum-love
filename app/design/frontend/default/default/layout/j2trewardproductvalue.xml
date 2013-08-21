@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<layout>
+    <checkout_onepage_index translate="label">        
+        <reference name="checkout.onepage.reward">
+            <action method="setTemplate">
+                    <template>j2trewardproductvalue/onepage.phtml</template>
+            </action>
+            <block type="rewardpoints/coupon" name="checkout.onepage.reward.original" as="reward_review_original" template="rewardpoints/onepage_review.phtml" />
+            <block type="j2trewardproductvalue/cartreview" name="checkout.onepage.reward.review" as="reward_point_review" template="j2trewardproductvalue/onepage_points_review.phtml"/>
+        </reference>
+    </checkout_onepage_index>
+    
+    
+    <checkout_cart_index>
+        <reference name="checkout.cart.coupon">
+            <reference name="checkout_cart_coupon_normal">
+                <action method="setTemplate">
+                        <template>j2trewardproductvalue/coupons.phtml</template>
+                </action>
+                <block type="rewardpoints/coupon" name="points_cart_coupon_normal" as="original_coupon_points" template="rewardpoints/reward_coupon.phtml">
+                    <block type="checkout/cart_coupon" name="checkout_cart_coupon_reward" as="coupon_original" template="checkout/cart/coupon.phtml"/>
+                </block>
+                <block type="j2trewardproductvalue/cartreview" name="reward_cartreview" as="reward_cartreview" template="j2trewardproductvalue/cart_review.phtml"/>
+            </reference>
+        </reference>
+    </checkout_cart_index>
+    
+    
+    <catalog_category_default>
+        <reference name="content">
+            <reference name="product_list">
+                <action method="addAttribute"><name>j2t_rewardvalue</name></action>
+            </reference>
+        </reference>        
+    </catalog_category_default>
+    
+    <catalog_category_layered>
+        <reference name="content">
+            <reference name="product_list">
+                <action method="addAttribute"><name>j2t_rewardvalue</name></action>
+            </reference>
+        </reference>
+    </catalog_category_layered>
+    
+    <catalogsearch_result_index>
+        <reference name="content">
+            <reference name="search_result_list">
+                <action method="addAttribute"><name>j2t_rewardvalue</name></action>
+            </reference>
+        </reference>
+    </catalogsearch_result_index>
+    
+    <catalogsearch_advanced_result>
+        <reference name="content">
+            <reference name="search_result_list">
+                <action method="addAttribute"><name>j2t_rewardvalue</name></action>
+            </reference>
+        </reference>
+    </catalogsearch_advanced_result>
+    
+</layout>

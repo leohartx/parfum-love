@@ -1,0 +1,123 @@
+<?php 
+    $facebook_points = Mage::getStoreConfig('rewardpoints/social/facebook_like_points', Mage::app()->getStore()->getId());
+    $googleplus_points = Mage::getStoreConfig('rewardpoints/social/googleplus_points', Mage::app()->getStore()->getId());
+    $twitter_points = Mage::getStoreConfig('rewardpoints/social/twitter_points', Mage::app()->getStore()->getId());
+    
+    //facebook_datalayout
+    //facebook_dataaction
+    $facebook_datalayout = Mage::getStoreConfig('rewardpoints/social/facebook_datalayout', Mage::app()->getStore()->getId());
+    $facebook_datalayout = ($facebook_datalayout) ? $facebook_datalayout : 'button_count';
+    $facebook_dataaction = Mage::getStoreConfig('rewardpoints/social/facebook_dataaction', Mage::app()->getStore()->getId());
+    $facebook_dataaction = ($facebook_dataaction) ? $facebook_dataaction : 'like';
+    $facebook_language = Mage::getStoreConfig('rewardpoints/social/facebook_language', Mage::app()->getStore()->getId());
+    $facebook_language = ($facebook_language) ? $facebook_language : 'en_US';
+
+    //googleplus_datasize
+    //googleplus_dataannotation
+    //googleplus_extra
+    $googleplus_datasize = Mage::getStoreConfig('rewardpoints/social/googleplus_datasize', Mage::app()->getStore()->getId());
+    $googleplus_datasize = ($googleplus_datasize) ? $googleplus_datasize : 'medium';
+    $googleplus_dataannotation = Mage::getStoreConfig('rewardpoints/social/googleplus_dataannotation', Mage::app()->getStore()->getId());
+    $googleplus_dataannotation = ($googleplus_dataannotation) ? $googleplus_dataannotation : 'bubble';
+    $googleplus_extra = Mage::getStoreConfig('rewardpoints/social/googleplus_extra', Mage::app()->getStore()->getId());
+    $googleplus_extra = ($googleplus_extra) ? $googleplus_extra : '';
+
+    //twitter_datacount
+    //twitter_datasize
+    $twitter_datacount = Mage::getStoreConfig('rewardpoints/social/twitter_datacount', Mage::app()->getStore()->getId());
+    $twitter_datacount = ($twitter_datacount) ? $twitter_datacount : 'horizontal';
+    $twitter_datasize = Mage::getStoreConfig('rewardpoints/social/twitter_datasize', Mage::app()->getStore()->getId());
+    $twitter_datasize = ($twitter_datasize) ? $twitter_datasize : 'default';
+    
+?>
+
+<?php if ($facebook_points || $googleplus_points || $twitter_points):?>
+<div class="block block-rewardsocial">
+    <div class="block-title">
+        <strong><span><?php echo $this->__('Share and collect points') ?></span></strong>
+    </div>
+    <div class="block-content block-rewardsocial-content">
+        
+        <?php if (Mage::getSingleton('customer/session')->isLoggedIn()): ?>
+        <?php if ($facebook_points):?>
+        <!-- Facebook Like -->
+        <p class="j2t-social-title-content">
+            <?php echo $this->__('Like this site and collect %d point(s)', $facebook_points);?>
+        </p>
+        <p class="j2t-social-inside-content">
+            <script>(function(d, s, id) {
+              var js, fjs = d.getElementsByTagName(s)[0];
+              if (d.getElementById(id)) return;
+              js = d.createElement(s); js.id = id;
+              js.src = "//connect.facebook.net/<?php echo $facebook_language;?>/all.js#xfbml=1";
+              fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));</script>            
+            <fb:like href="<?php echo $this->getUrl();?>" data-send="false" data-action="<?php echo $facebook_dataaction;?>" data-layout="<?php echo $facebook_datalayout;?>" data-width="450" data-show-faces="true"></fb:like>
+            
+            <br style="clear:both;" />
+        </p>
+        <?php endif;?>
+        <!-- End Facebook Like -->
+        
+        <?php if ($googleplus_points > 0):?>
+        <!-- Google Plus -->
+        <p class="j2t-social-title-content">
+            <?php echo $this->__('Google Plus this site and collect %d point(s)', $googleplus_points);?>
+        </p>
+        <p class="j2t-social-inside-content">
+            <script type="text/javascript">
+            //<![CDATA[
+                function recordGooglePlus(jsonParam){
+                    if (jsonParam.state == "on"){
+                        var url = "<?php echo $this->getUrl('j2trewardsocial/social/index')?>";
+                        var myAjax = new Ajax.Request(
+                        url,
+                        {
+                            asynchronous: true,
+                            method: 'post',
+                            parameters : "network=gp",
+                            onException: function (xhr, e)
+                            {
+                                alert('Exception : ' + e);
+                            },
+                            onComplete: function (xhr)
+                            {
+                                //alert(xhr.responseText);
+                            }
+
+                        });
+                    }
+                }
+            //]]>
+            </script>
+
+            <!-- Place this tag where you want the +1 button to render. -->
+            <div class="g-plusone" data-size="<?php echo $googleplus_datasize;?>" data-annotation="<?php echo $googleplus_dataannotation;?>" data-callback="recordGooglePlus" data-href="<?php echo $this->getUrl();?>"></div>
+            
+        </p>
+        <!-- end Google Plus -->
+        <?php endif;?>
+        
+        <?php if ($twitter_points):?>
+        <!-- Twitter -->
+        <p class="j2t-social-title-content">
+            <?php echo $this->__('Tweet this site and collect %d point(s)', $twitter_points);?>
+        </p>
+        <p class="j2t-social-inside-content">
+            <a href="https://twitter.com/share" class="twitter-share-button" data-count="<?php echo $twitter_datacount;?>" data-size="<?php echo $twitter_datasize;?>" data-url="<?php echo Mage::helper("j2trewardsocial")->createShortUrl($this->getUrl());?>">Tweet</a>
+        </p>
+        <!-- end Twitter -->
+        <?php endif;?>
+        
+        
+        <?php else:?>
+        <p class="empty">
+            <?php $account_title = $this->__('your account');?>
+            <?php echo $this->__('Log into %s in order to collect extra points when sharing this site with your favorite social network.', '<a href="'.$this->getUrl('j2trewardsocial/social/login').'" title="'.$account_title.'">'.$account_title.'</a>');?>
+        </p>
+        <?php endif; ?>
+        
+    </div>
+</div>
+<?php endif;?>
+

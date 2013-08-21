@@ -51,7 +51,7 @@ Default layout, loads most of the pages
         <reference name="left">
         </reference>
         <reference name="right">
-            <block type="catalog/product_compare_sidebar" after="cart_sidebar" name="catalog.compare.sidebar" template="catalog/product/compare/sidebar.phtml"/>
+        <!--    <block type="catalog/product_compare_sidebar" after="cart_sidebar" name="catalog.compare.sidebar" template="catalog/product/compare/sidebar.phtml"/>   -->
         </reference>
         <reference name="footer_links">
             <action method="addLink" translate="label title" module="catalog" ifconfig="catalog/seo/site_map"><label>Site Map</label><url helper="catalog/map/getCategoryUrl" /><title>Site Map</title></action>
@@ -160,7 +160,7 @@ Compare products page
             <action method="addJs"><script>varien/product.js</script></action>
         </reference>
         <reference name="content">
-            <block type="catalog/product_compare_list" name="catalog.compare.list" template="catalog/product/compare/list.phtml"/>
+            <!-- <block type="catalog/product_compare_list" name="catalog.compare.list" template="catalog/product/compare/list.phtml"/> -->
         </reference>
     </catalog_product_compare_index>
 

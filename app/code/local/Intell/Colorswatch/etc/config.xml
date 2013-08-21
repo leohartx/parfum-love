@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * @category   Intell
+ * @package    Intell_Colorswatch
+ * @author     ModuleCreator
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+ -->
+<config>
+    <modules>
+        <Intell_Colorswatch>
+            <version>0.1.0</version>
+        </Intell_Colorswatch>
+    </modules>
+    <frontend>
+        <routers>
+            <colorswatch>
+                <use>standard</use>
+                <args>
+                    <module>Intell_Colorswatch</module>
+                    <frontName>colorswatch</frontName>
+                </args>
+            </colorswatch>
+        </routers>
+        <layout>
+            <updates>
+                <colorswatch>
+                    <file>colorswatch.xml</file>
+                </colorswatch>
+            </updates>
+        </layout>
+    </frontend>
+    <admin>
+        <routers>
+			<colorswatch>
+				<use>admin</use>
+				<args>
+					<module>Intell_Colorswatch</module>
+					<frontName>colorswatch</frontName>
+				</args>
+			</colorswatch>
+        </routers>
+    </admin>
+    <adminhtml>
+		<menu>
+			<colorswatch module="colorswatch">
+				<title>Colorswatch</title>
+				<sort_order>71</sort_order>               
+				<children>
+					<items module="colorswatch">
+						<title>Manage Items</title>
+						<sort_order>0</sort_order>
+						<action>colorswatch/adminhtml_colorswatch</action>
+					</items>
+				</children>
+			</colorswatch>
+		</menu>
+		<acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+					<children>
+						<Intell_Colorswatch>
+							<title>Colorswatch Module</title>
+							<sort_order>10</sort_order>
+						</Intell_Colorswatch>
+						<system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <color>
+                                            <title>Settings</title>
+                                        </color>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+		<layout>
+			<updates>
+				<colorswatch>
+					<file>colorswatch.xml</file>
+				</colorswatch>
+			</updates>
+		</layout>
+    </adminhtml>   
+    <global>
+        <models>
+            <colorswatch>
+                <class>Intell_Colorswatch_Model</class>
+                <resourceModel>colorswatch_mysql4</resourceModel>
+            </colorswatch>
+            <colorswatch_mysql4>
+                <class>Intell_Colorswatch_Model_Mysql4</class>
+                <entities>
+                    <colorswatch>
+                        <table>colorswatch</table>
+                    </colorswatch>
+                </entities>
+            </colorswatch_mysql4>
+        </models>
+        <resources>
+            <colorswatch_setup>
+                <setup>
+                    <module>Intell_Colorswatch</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </colorswatch_setup>
+            <colorswatch_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </colorswatch_write>
+            <colorswatch_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </colorswatch_read>
+        </resources>
+        <blocks>
+            <colorswatch>
+                <class>Intell_Colorswatch_Block</class>
+            </colorswatch>
+        </blocks>
+        <helpers>
+            <colorswatch>
+                <class>Intell_Colorswatch_Helper</class>
+            </colorswatch>
+        </helpers>
+    </global>
+</config>

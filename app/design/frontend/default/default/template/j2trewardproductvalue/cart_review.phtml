@@ -1,0 +1,35 @@
+<?php if($required_points = $this->getRequiredPoints()): ?>
+    <div class="discount-codes box discount">
+        <h2><?php echo $this->__('Required points'); ?></h2>
+        <?php //echo $this->getIllustrationImage()?>
+        <div class="rewards_point_cart"><?php echo $this->__("To validate this order, you need %s points.", $required_points);?></div>
+        <div class="rewards_point_cart-use"><?php echo $this->__("%s points will be automatically used when your order will be submitted.", $required_points);?></div>
+        <div>
+            <a id="j2t-show-required" onclick="$('j2t-show-required').hide(); $('j2t-hide-required').show(); $('j2t-required-points-table').show();" href="javascript:$('j2t-show-required').hide(); $('j2t-hide-required').show(); $('j2t-required-points-table').show(); return false;" alt="<?php echo $this->__('Show details');?>"><?php echo $this->__('Show details'); ?></a>
+            <a id="j2t-hide-required" style="display:none;" onclick="$('j2t-show-required').show(); $('j2t-hide-required').hide(); $('j2t-required-points-table').hide();" href="javascript:$('j2t-show-required').show(); $('j2t-hide-required').hide(); $('j2t-required-points-table').hide(); return false;" alt="<?php echo $this->__('Hide details');?>"><?php echo $this->__('Hide details'); ?></a>
+        </div>
+        <div>
+            <table id="j2t-required-points-table" class="data-table cart-table" style="display:none;">
+                <thead>
+                <tr>
+                    <th>&nbsp;</th>
+                    <th><?php echo $this->__('Product Name');?></th>
+                    <th><?php echo $this->__('Required Points');?></th>
+                </tr>
+                </thead>
+                <?php foreach ($this->getCartItems() as $item):?>
+                <?php if ($required_product_point = $this->getProductRequiredPoints($item)):?>
+                <tbody>
+                    <tr>
+                        <td><img src="<?php echo $this->getProductThumbnail($item)->resize(35); ?>" width="35" height="35" alt="<?php echo $this->htmlEscape($this->getProductName($item)) ?>" /></td>
+                        <td><?php echo $this->getProductName($item);?></td>
+                        <td><?php echo $this->__("%s points",$required_product_point);?></td>
+                    </tr>
+                </tbody>
+                <?php endif;?>
+                <?php endforeach;?>
+            </table>
+            <script type="text/javascript">decorateTable('j2t-required-points-table')</script>
+        </div>
+    </div>
+<?php endif; ?>

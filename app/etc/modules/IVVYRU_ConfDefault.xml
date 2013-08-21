@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <IVVYRU_ConfDefault>
+            <active>true</active>
+            <codePool>community</codePool>
+            <depends>
+               <Mage_Catalog/> 
+            </depends>
+        </IVVYRU_ConfDefault>
+    </modules>
+</config> 

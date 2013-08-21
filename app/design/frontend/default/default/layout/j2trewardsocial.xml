@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<layout>
+    <default>
+        <reference name="head">
+            <action method="addCss"><stylesheet>css/j2t_rewardsocial.css</stylesheet></action>
+        </reference>
+        <reference name="right">
+            <block type="j2trewardsocial/side" name="rewardsocial.side" before="-" template="j2trewardsocial/side.phtml"/>
+        </reference>
+        
+        <reference name="before_body_end">
+            <block type="core/template" name="j2t_rewardsocial_wrapper" after="-" template="j2trewardsocial/js.phtml" />
+        </reference>
+        
+    </default>
+    
+    
+    
+    <catalog_product_view>
+        <!--<reference name="product.info.addtocart">
+            <block type="page/html_wrapper" name="j2t.points.social.wrapper" translate="label">
+                <label>J2T Social Points Wrapper</label>
+                <block type="j2trewardsocial/socialpoints" name="j2t.points.social" as="points_social" template="j2trewardsocial/product_view.phtml">
+                    <action method="setIsInCatalogProduct"><value>1</value></action>
+                    <action method="setShowOrPosition">
+                        <value>after</value>
+                    </action>
+                </block>
+            </block>
+        </reference>-->
+        
+        <!--<reference name="product.info.addtocart">
+            <action method="setTemplate">
+                    <template>j2trewardsocial/addtocart_wrapper.phtml</template>
+            </action>
+
+            <block type="rewardpoints/productpoints" name="points_product" as="points_product" template="rewardpoints/addtocart.phtml"/>
+            <block type="j2trewardsocial/socialpoints" name="j2t.points.social" as="points_social" template="j2trewardsocial/product_view.phtml" />
+            <block type="catalog/product_view" name="original_addtocart" as="original_addtocart" template="catalog/product/view/addtocart.phtml">
+                <block type="page/html_wrapper" name="product.info.addtocart.paypal.wrapper" as="paypal_wrapper">
+                    <action method="setHtmlTagName"><tag>p</tag></action>
+                    <action method="setElementClass"><class>paypal-logo</class></action>
+                    <block type="paypal/express_shortcut" name="product.info.addtocart.paypal" template="paypal/express/shortcut.phtml">
+                        <action method="setIsInCatalogProduct"><value>1</value></action>
+                    </block>
+                </block>
+            </block>
+        </reference>-->
+        
+        
+        
+    </catalog_product_view>
+    
+</layout>
